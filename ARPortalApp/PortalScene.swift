@@ -118,6 +118,8 @@ class PortalScene: SCNScene {
         // Scale if necessary (models can be too big or small)
         businessmanNode.scale = SCNVector3(0.01, 0.01, 0.01) // Medium // Start small and adjust
         
+        businessmanNode.eulerAngles = SCNVector3(0, -Float.pi / 4, 0)
+        
         
         
         // Add to the room
@@ -134,14 +136,18 @@ class PortalScene: SCNScene {
         let whiteboardNode = whiteboardScene.rootNode
         
         // Position to the LEFT of the businessman
-        // Businessman is at x = 1.2, so put whiteboard at x = 0.8 (to the left)
-        whiteboardNode.position = SCNVector3(-0.5, -1.0, 0.25) // Same Y and Z as businessman
+        whiteboardNode.position = SCNVector3(-0.5, -1.0, 0.25)
         
         // Scale - start small and adjust
         whiteboardNode.scale = SCNVector3(0.002, 0.002, 0.002)
         
+        // NAME THE WHITEBOARD FOR TAP DETECTION
+        whiteboardNode.name = "whiteboard"
+        
         // Apply the same lighting fix to prevent overlighting
         whiteboardNode.enumerateChildNodes { (node, _) in
+            // Name all child nodes too for tap detection
+            node.name = "whiteboard"
             if let geometry = node.geometry {
                 for material in geometry.materials {
                     material.lightingModel = .constant

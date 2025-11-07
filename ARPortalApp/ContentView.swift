@@ -1,10 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showWelcomeView = false
+    
     var body: some View {
         ZStack {
             // AR View as background
-            ARPortalView()
+            ARPortalView(showWelcomeView: $showWelcomeView)
                 .edgesIgnoringSafeArea(.all)
             
             // Simple instructions
@@ -18,7 +20,17 @@ struct ContentView: View {
                     .padding(.top, 50)
                 
                 Spacer()
+                
+                Text("Tap the whiteboard to begin!")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.black.opacity(0.7))
+                    .cornerRadius(10)
+                    .padding(.bottom, 100)
             }
+        }
+        .sheet(isPresented: $showWelcomeView) {
+            WelcomeView()
         }
     }
 }
