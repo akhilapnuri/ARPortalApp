@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var currentRoom: RoomScene.RoomType
     
     var body: some View {
         ZStack {
@@ -48,17 +49,54 @@ struct WelcomeView: View {
                             .multilineTextAlignment(.center)
                             .lineSpacing(4)
                     }
+                    
+                    // Portal Buttons
+                    VStack(spacing: 15) {
+                        Button(action: {
+                            currentRoom = .classroom
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Enter The Classroom")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.green)
+                                .cornerRadius(10)
+                        }
+                        
+                        // Add The Vault and Crystal Ball buttons later
+                        Button(action: {
+                            // Coming soon
+                        }) {
+                            Text("The Vault (Coming Soon)")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray)
+                                .cornerRadius(10)
+                        }
+                        .disabled(true)
+                        
+                        Button(action: {
+                            // Coming soon
+                        }) {
+                            Text("The Crystal Ball (Coming Soon)")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray)
+                                .cornerRadius(10)
+                        }
+                        .disabled(true)
+                    }
+                    .padding(.horizontal, 25)
                 }
-                .padding(.horizontal, 25)
                 
                 Spacer()
             }
         }
-    }
-}
-
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
     }
 }
